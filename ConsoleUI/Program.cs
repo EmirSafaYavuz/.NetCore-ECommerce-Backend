@@ -9,9 +9,15 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ProductTest();
+            //ProductTest();
             //CategoryTest();
+            ProductManager pm = new ProductManager(new EfProductDal());
+
+            Console.WriteLine(pm.GetById(1).Data.ProductName);
+
+            
         }
+
 
         private static void CategoryTest()
         {
@@ -25,6 +31,7 @@ namespace ConsoleUI
         private static void ProductTest()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
+            productManager.GetById(1);
 
             var result = productManager.GetProductDetails();
 
