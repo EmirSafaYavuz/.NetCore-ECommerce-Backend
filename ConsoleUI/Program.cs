@@ -14,8 +14,6 @@ namespace ConsoleUI
             //ProductManager pm = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal));
 
             //Console.WriteLine(pm.GetById(1).Data.ProductName);
-
-            
         }
 
 
