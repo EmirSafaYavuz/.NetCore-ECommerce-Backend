@@ -31,15 +31,14 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
-        [SecuredOperation("product.add,admin")]
+        //[SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             IResult result = BusinessRules.Run(
                 CheckIfProductNameAlreadyExists(product.ProductName), 
-                CheckIfProductCountOfCategoryCorrect(product.CategoryId),
-                CheckIfCategoryLimitExceded()
+                CheckIfProductCountOfCategoryCorrect(product.CategoryId)
                 );
 
             if (result != null)
@@ -73,7 +72,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        [PerformanceAspect(5)]
+        //[PerformanceAspect(5)]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
@@ -135,6 +134,11 @@ namespace Business.Concrete
 
         [TransactionScopeAspect]
         public IResult AddTransactionalTest(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<Product>> GetByCategoryId(int id)
         {
             throw new NotImplementedException();
         }
